@@ -1,0 +1,10 @@
+{
+    "type": "module",
+    "dependencies": {
+        "jest": "^29.7.0",
+        "ts-jest": "^29.1.4"
+    },
+    "devDependencies": {
+        "@babel/preset-typescript": "^7.24.6"
+    }
+}
