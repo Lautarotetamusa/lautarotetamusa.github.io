@@ -1,28 +1,38 @@
 import {describe, expect, test} from '@jest/globals';
 import {Game} from "../src/main";
 
-test('pierde una vida si erra', function () {
-    const vidasIniciales = 3;
+const vidasIniciales = 3;
+
+test('pierde una vida si erra la palabra', function () {
     const game = new Game("perro", vidasIniciales);
+
     game.arriesgarPalabra("gato");
 
-    expect(game.vidas).toBe(vidasIniciales-1);
+    expect(game.lifes).toBe(vidasIniciales-1);
+});
+
+test('pierde una vida si la palabra no contiene la letra', function () {
+    const game = new Game("perro", vidasIniciales);
+
+    game.arriesgarLetra('a');
+
+    expect(game.lifes).toBe(vidasIniciales-1);
 });
 
 test('si acierta queda con las mismas vidas', function () {
-    const vidasIniciales = 3;
     const game = new Game("perro", vidasIniciales);
+
     game.arriesgarPalabra("perro");
 
-    expect(game.vidas).toBe(vidasIniciales);
+    expect(game.lifes).toBe(vidasIniciales);
 });
 
 test('si las vidas llega a 0, pierde', function () {
-    const vidasIniciales = 3;
     const game = new Game("perro", vidasIniciales);
+
     game.arriesgarPalabra("casa");
     game.arriesgarPalabra("gato");
     game.arriesgarPalabra("zapato");
 
-    expect(game.perdio).toBe(true);
+    expect(game.loss).toBe(true);
 });
