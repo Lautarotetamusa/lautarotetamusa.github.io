@@ -1,5 +1,4 @@
 import {describe, expect, test} from '@jest/globals';
-import { assert } from 'console';
 import {Game} from "../src/main";
 
 test('Acierta la palabra', function () {

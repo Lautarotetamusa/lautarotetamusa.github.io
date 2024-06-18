@@ -14,7 +14,7 @@ test('si acierta queda con las mismas vidas', function () {
     const game = new Game("perro", vidasIniciales);
     game.arriesgarPalabra("perro");
 
-    expect(game.vidas).toBe(game.vidas);
+    expect(game.vidas).toBe(vidasIniciales);
 });
 
 test('si las vidas llega a 0, pierde', function () {
