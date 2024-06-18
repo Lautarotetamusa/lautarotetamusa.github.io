@@ -22,6 +22,7 @@ export class Game {
         }
         if (this.vidas == 0){
             this.perdio = true;
+            return false;
         }
 
         return correct;
