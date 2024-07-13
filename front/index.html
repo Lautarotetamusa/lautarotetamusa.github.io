@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Ahorcado</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Juego del Ahorcado</h1>
+        <div class="game-container">
+            <div id="word-container">
+                <span class="letter">_</span>
+                <span class="letter">_</span>
+                <span class="letter">_</span>
+                <span class="letter">_</span>
+                <span class="letter">_</span>
+            </div>
+            <div id="input-container">
+                <input type="text" id="letter-input" maxlength="1">
+                <button id="submit-letter">Adivinar</button>
+            </div>
+            <div id="guessed-letters">
+                <p>Letras arriesgadas: <span id="guessed-letters-list">-</span></p>
+            </div>
+            <div id="lives-counter">
+                <p>Vidas restantes: <span id="lives"></span></p>
+            </div>
+            <div id="message"></div>
+        </div>
+        <button id="reset-button">Reiniciar Juego</button>
+    </div>
+</body>
+</html>
