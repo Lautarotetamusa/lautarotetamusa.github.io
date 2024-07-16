@@ -6,7 +6,7 @@ export class Game {
     maxLifes: number;
     loss: boolean; 
 
-    coincideces: boolean[]
+    coincideces: boolean[];
 
     constructor(word: string, maxLifes: number = 3) {
         assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");

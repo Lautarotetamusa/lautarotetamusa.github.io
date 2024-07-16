@@ -8,10 +8,12 @@
         "@babel/preset-typescript": "^7.24.6",
         "@types/node": "^20.14.10",
         "@types/nodegit": "^0.28.7",
+        "http-server": "^14.1.1",
         "pull": "^2.1.1",
         "typescript": "^5.5.3"
     },
     "scripts": {
-        "test": "npx jest tests/*"
+        "test": "npx jest tests/*",
+        "build": "tsc src/main.ts --outDir front"
     }
 }
