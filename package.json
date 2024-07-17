@@ -15,6 +15,7 @@
     "scripts": {
         "test": "npx jest tests/*",
         "build": "npx tsc",
+        "dev": "npx http-server",
         "run": "http-server"
     }
 }

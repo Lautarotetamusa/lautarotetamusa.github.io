@@ -7,6 +7,8 @@ const lives = document.getElementById("lives");
 const guesses = document.getElementById("guessed-letters-list");
 const wordContainer = document.getElementById("word-container");
 const letters = wordContainer.getElementsByClassName("letter");
+const letterInput = document.getElementById("letter-input");
+const letterBtn = document.getElementById("submit-letter");
 
 resetGame();
 
@@ -24,13 +26,14 @@ const lossAlert = (word) => {
         icon: "error"
 }}
 
-document.getElementById("submit-letter").addEventListener("click", () => {
+letterBtn.addEventListener("click", () => {
     const letterInput = document.getElementById("letter-input");
     game.guessLetter(letterInput.value);
     update();
 
     if (game.win()){
         Swal.fire(winAlert(game.word));
+        resetGame();
     }else if(game.loss()){
         Swal.fire(lossAlert(game.word));
         resetGame();
@@ -38,6 +41,13 @@ document.getElementById("submit-letter").addEventListener("click", () => {
 
     letterInput.value = ""
 });
+
+letterInput.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    letterBtn.click();
+  }
+}); 
 
 document.getElementById("reset-button").addEventListener("click", () => {
     console.log("click");
