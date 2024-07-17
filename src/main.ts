@@ -44,7 +44,7 @@ export class Game {
         return win;
     }
 
-    arriesgarPalabra(word: string): boolean{
+    guessWord(word: string): boolean{
         this.guesses.concat(word.split(''));
 
         const correct = word == this.word;
@@ -52,7 +52,7 @@ export class Game {
         return correct;
     }
 
-    arriesgarLetra(letter: string): boolean{
+    guessLetter(letter: string): boolean{
         let correct = false;
         this.guesses.push(letter);
         for (let i = 0; i < this.word.length; i++){

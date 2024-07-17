@@ -3,7 +3,7 @@ import {Game} from "../src/main";
 const game = new Game("perro");
 
 test('encuentra una coincidencia', function () {
-    game.arriesgarLetra('r');
+    game.guessLetter('r');
 
     const coincideces = game.getCoincidences();
     expect(coincideces[0]).toBe(false);
@@ -17,12 +17,12 @@ test('encuentra una coincidencia', function () {
 });
 
 test('encontro todas las coicidencias', function () {
-    game.arriesgarLetra('r');
-    game.arriesgarLetra('a');
-    game.arriesgarLetra('e');
-    game.arriesgarLetra('p');
-    game.arriesgarLetra('u');
-    game.arriesgarLetra('o');
+    game.guessLetter('r');
+    game.guessLetter('a');
+    game.guessLetter('e');
+    game.guessLetter('p');
+    game.guessLetter('u');
+    game.guessLetter('o');
 
     expect(game.win()).toBe(true);
     expect(game.loss()).toBe(false);
