@@ -1,4 +1,4 @@
-import { assert } from "console";
+//import { assert } from "console";
 
 export class Game {
     word: string;
@@ -9,7 +9,7 @@ export class Game {
     private guesses: string[];
 
     constructor(word: string, maxLifes: number = 3) {
-        assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
+        //assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
 
         this.word = word;
         this.maxLifes = maxLifes;

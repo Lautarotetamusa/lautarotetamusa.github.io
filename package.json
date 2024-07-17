@@ -14,7 +14,7 @@
     },
     "scripts": {
         "test": "npx jest tests/*",
-        "build": "tsc src/main.ts --outDir front",
+        "build": "npx tsc",
         "run": "http-server"
     }
 }

@@ -3,6 +3,9 @@
     "target": "es5",
     "module": "es6",
     "outDir": "./front",
-    "strict": true
-  }
+    "rootDir": "./src",
+    "strict": true,
+    "moduleResolution": "node"
+  },
+    "include": ["src/**/*"],
 }
