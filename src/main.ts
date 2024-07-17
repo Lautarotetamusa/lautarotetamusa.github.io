@@ -2,11 +2,11 @@ import { assert } from "console";
 
 export class Game {
     word: string;
-    lifes: number;
     maxLifes: number;
-    loss: boolean; 
 
-    coincideces: boolean[];
+    private lifes: number;
+    private coincideces: boolean[];
+    private guesses: string[];
 
     constructor(word: string, maxLifes: number = 3) {
         assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
@@ -14,18 +14,26 @@ export class Game {
         this.word = word;
         this.maxLifes = maxLifes;
         this.lifes = maxLifes;
-        this.loss = false;
 
-        this.coincideces = Array(word.length).fill(false)
+        this.coincideces = Array(word.length).fill(false);
+        this.guesses = [];
     }
 
-    private calcLifes(correct: boolean) {
-        if (!correct){
-            this.lifes --;
-        }
-        if (this.lifes == 0){
-            this.loss = true;
-        }
+    getCoincidences(){
+        return this.coincideces;
+    }
+    getGuesses(){
+        return this.guesses;
+    }
+    alreadyGuessed(letter: string){
+        return this.guesses.includes(letter);
+    }
+    getLifes(){
+        return this.lifes;
+    }
+
+    loss(): boolean {
+        return this.lifes <= 0
     }
 
     win(): boolean {
@@ -37,21 +45,23 @@ export class Game {
     }
 
     arriesgarPalabra(word: string): boolean{
-        const correct = word == this.word;
-        this.calcLifes(correct);
+        this.guesses.concat(word.split(''));
 
+        const correct = word == this.word;
+        if (!correct) this.lifes--;
         return correct;
     }
 
-    arriesgarLetra(char: string): boolean{
+    arriesgarLetra(letter: string): boolean{
         let correct = false;
+        this.guesses.push(letter);
         for (let i = 0; i < this.word.length; i++){
-            if (this.word[i] == char){
+            if (this.word[i] == letter){
                 this.coincideces[i] = true;
                 correct = true;
             }
         }
-        this.calcLifes(correct);
+        if (!correct) this.lifes--;
 
         return correct;
     }
