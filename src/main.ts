@@ -2,7 +2,6 @@
 
 export class Game {
     word: string;
-    maxLifes: number;
 
     private lifes: number;
     private coincideces: boolean[];
@@ -12,7 +11,6 @@ export class Game {
         //assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
 
         this.word = word;
-        this.maxLifes = maxLifes;
         this.lifes = maxLifes;
 
         this.coincideces = Array(word.length).fill(false);
@@ -30,6 +28,12 @@ export class Game {
     }
     getLifes(){
         return this.lifes;
+    }
+
+    reset(maxLifes: number = 3){
+        this.lifes = maxLifes;
+        this.coincideces = Array(this.word.length).fill(false);
+        this.guesses = [];
     }
 
     loss(): boolean {
@@ -53,6 +57,10 @@ export class Game {
     }
 
     guessLetter(letter: string): boolean{
+        if (this.alreadyGuessed(letter)){
+            return true;
+        }
+
         let correct = false;
         this.guesses.push(letter);
         for (let i = 0; i < this.word.length; i++){

@@ -1,18 +1,67 @@
 import { Game } from "./main.js";
-const game = new Game("perro");
+
+const maxLifes = 3;
+const game = new Game("perro", maxLifes);
 
 const lives = document.getElementById("lives");
-const tries = document.getElementById("guessed-letters");
+const guesses = document.getElementById("guessed-letters-list");
 const wordContainer = document.getElementById("word-container");
 const letters = wordContainer.getElementsByClassName("letter");
 
+resetGame();
+
+const winAlert = (word) => {
+    return{
+        title: "Ganaste!",
+        text: `La palabra es: "${word}"`,
+        icon: "success"
+}}
+
+const lossAlert = (word) => {
+    return{
+        title: "Perdiste :((",
+        text: `La palabra era: "${word}"`,
+        icon: "error"
+}}
+
 document.getElementById("submit-letter").addEventListener("click", () => {
     const letterInput = document.getElementById("letter-input");
-    game.arriesgarLetra(letterInput.value);
+    game.guessLetter(letterInput.value);
+    update();
+
+    if (game.win()){
+        Swal.fire(winAlert(game.word));
+    }else if(game.loss()){
+        Swal.fire(lossAlert(game.word));
+        resetGame();
+    }
+
     letterInput.value = ""
+});
+
+document.getElementById("reset-button").addEventListener("click", () => {
+    console.log("click");
+    resetGame();
+});
+
+function resetGame(){
+    game.reset(maxLifes);
+    update();
+}
+
+function update(){
     updateLives();
     updateWord();
-});
+    updateGuesses();
+}
+
+function updateGuesses(){
+    if (game.getGuesses().length > 0){
+        guesses.innerHTML = game.getGuesses().join(', ');
+    }else{
+        guesses.innerHTML = '-';
+    }
+}
 
 function updateLives(){
     lives.innerText = game.lifes;
