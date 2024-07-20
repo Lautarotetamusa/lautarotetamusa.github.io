@@ -56,10 +56,14 @@ export class Game {
         return correct;
     }
 
+    private isValidLetter(letter: string): boolean{
+        return  letter.length === 1 && 
+                letter.match(/[a-z]/i) !== null;
+    }
+
     guessLetter(letter: string): boolean{
-        if (this.alreadyGuessed(letter)){
-            return true;
-        }
+        if (this.alreadyGuessed(letter)) return true;
+        if (!this.isValidLetter(letter)) return false; 
 
         let correct = false;
         this.guesses.push(letter);

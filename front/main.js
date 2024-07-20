@@ -44,10 +44,15 @@ var Game = /** @class */ (function () {
             this.lifes--;
         return correct;
     };
+    Game.prototype.isValidLetter = function (letter) {
+        return letter.length === 1 &&
+            letter.match(/[a-z]/i) !== null;
+    };
     Game.prototype.guessLetter = function (letter) {
-        if (this.alreadyGuessed(letter)) {
+        if (this.alreadyGuessed(letter))
             return true;
-        }
+        if (!this.isValidLetter(letter))
+            return false;
         var correct = false;
         this.guesses.push(letter);
         for (var i = 0; i < this.word.length; i++) {
