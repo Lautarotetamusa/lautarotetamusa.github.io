@@ -1,7 +1,7 @@
 import { Game } from "./main.js";
 
-const maxLifes = 3;
-const game = new Game("perro", maxLifes);
+const maxLifes = 5;
+const game = new Game(undefined, maxLifes);
 
 const lives = document.getElementById("lives");
 const guesses = document.getElementById("guessed-letters-list");
@@ -55,8 +55,10 @@ document.getElementById("reset-button").addEventListener("click", () => {
 });
 
 function resetGame(){
-    game.reset(maxLifes);
-    update();
+    game.reset(maxLifes, () => {
+        update();
+        setupWord();
+    });
 }
 
 function update(){
@@ -70,6 +72,17 @@ function updateGuesses(){
         guesses.innerHTML = game.getGuesses().join(', ');
     }else{
         guesses.innerHTML = '-';
+    }
+}
+
+function setupWord(){
+    wordContainer.innerHTML = '';
+
+    for (const _ in game.word) {
+        var span = document.createElement("span");
+        span.className = "letter";
+        span.innerHTML = "_";
+        wordContainer.appendChild(span);
     }
 }
 

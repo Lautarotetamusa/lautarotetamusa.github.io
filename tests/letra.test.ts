@@ -12,6 +12,12 @@ test('La palabra NO contiene la leta', function () {
     expect(game.alreadyGuessed('a')).toBe(true);
 });
 
+test('Se puede arriesgar la letra en mayusculas', function () {
+    expect(game.guessLetter('O')).toBe(false);
+    expect(game.alreadyGuessed('o')).toBe(true);
+    expect(game.getCoincidences().at(4)).toBe(true);
+});
+
 test('La letra ya fue arriesgada', function () {
     game.guessLetter('u');
     expect(game.alreadyGuessed('u')).toBe(true);

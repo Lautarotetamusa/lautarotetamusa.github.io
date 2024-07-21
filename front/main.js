@@ -1,61 +1,78 @@
 //import { assert } from "console";
-var Game = /** @class */ (function () {
-    function Game(word, maxLifes) {
+import { getRandomWord } from "./api.js";
+export class Game {
+    word = "";
+    lifes;
+    coincideces = [];
+    guesses = [];
+    constructor(word, maxLifes = 3) {
         //assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
-        if (maxLifes === void 0) { maxLifes = 3; }
-        this.word = word;
         this.lifes = maxLifes;
-        this.coincideces = Array(word.length).fill(false);
-        this.guesses = [];
+        if (!word) {
+            this.setNewWord(() => { });
+        }
+        else {
+            this.word = word;
+            this.coincideces = Array(this.word.length).fill(false);
+        }
     }
-    Game.prototype.getCoincidences = function () {
+    setNewWord(cb) {
+        getRandomWord((word, err) => {
+            if (err !== null) {
+                console.error(err);
+                throw new Error(err);
+            }
+            this.word = word;
+            this.coincideces = Array(this.word.length).fill(false);
+            this.guesses = [];
+            cb();
+        });
+    }
+    getCoincidences() {
         return this.coincideces;
-    };
-    Game.prototype.getGuesses = function () {
+    }
+    getGuesses() {
         return this.guesses;
-    };
-    Game.prototype.alreadyGuessed = function (letter) {
+    }
+    alreadyGuessed(letter) {
         return this.guesses.includes(letter);
-    };
-    Game.prototype.getLifes = function () {
+    }
+    getLifes() {
         return this.lifes;
-    };
-    Game.prototype.reset = function (maxLifes) {
-        if (maxLifes === void 0) { maxLifes = 3; }
+    }
+    reset(maxLifes = 3, cb) {
         this.lifes = maxLifes;
-        this.coincideces = Array(this.word.length).fill(false);
-        this.guesses = [];
-    };
-    Game.prototype.loss = function () {
+        this.setNewWord(cb);
+    }
+    loss() {
         return this.lifes <= 0;
-    };
-    Game.prototype.win = function () {
-        var win = true;
-        for (var _i = 0, _a = this.coincideces; _i < _a.length; _i++) {
-            var c = _a[_i];
+    }
+    win() {
+        let win = true;
+        for (const c of this.coincideces) {
             win = c && win;
         }
         return win;
-    };
-    Game.prototype.guessWord = function (word) {
+    }
+    guessWord(word) {
         this.guesses.concat(word.split(''));
-        var correct = word == this.word;
+        const correct = word == this.word;
         if (!correct)
             this.lifes--;
         return correct;
-    };
-    Game.prototype.isValidLetter = function (letter) {
+    }
+    isValidLetter(letter) {
         return letter.length === 1 &&
             letter.match(/[a-z]/i) !== null;
-    };
-    Game.prototype.guessLetter = function (letter) {
+    }
+    guessLetter(letter) {
         if (this.alreadyGuessed(letter))
             return true;
         if (!this.isValidLetter(letter))
             return false;
-        var correct = false;
+        let correct = false;
         this.guesses.push(letter);
-        for (var i = 0; i < this.word.length; i++) {
+        for (let i = 0; i < this.word.length; i++) {
             if (this.word[i] == letter) {
                 this.coincideces[i] = true;
                 correct = true;
@@ -64,7 +81,5 @@ var Game = /** @class */ (function () {
         if (!correct)
             this.lifes--;
         return correct;
-    };
-    return Game;
-}());
-export { Game };
+    }
+}
