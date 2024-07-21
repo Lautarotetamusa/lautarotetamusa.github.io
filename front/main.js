@@ -12,7 +12,7 @@ export class Game {
             this.setNewWord(() => { });
         }
         else {
-            this.word = word;
+            this.word = normalizeStr(word);
             this.coincideces = Array(this.word.length).fill(false);
         }
     }
@@ -22,7 +22,7 @@ export class Game {
                 console.error(err);
                 throw new Error(err);
             }
-            this.word = word;
+            this.word = normalizeStr(word);
             this.coincideces = Array(this.word.length).fill(false);
             this.guesses = [];
             cb();
@@ -66,6 +66,7 @@ export class Game {
             letter.match(/[a-z]/i) !== null;
     }
     guessLetter(letter) {
+        letter = normalizeStr(letter);
         if (this.alreadyGuessed(letter))
             return true;
         if (!this.isValidLetter(letter))
@@ -82,4 +83,10 @@ export class Game {
             this.lifes--;
         return correct;
     }
+}
+function normalizeStr(str) {
+    return str.normalize('NFD')
+        .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2")
+        .normalize()
+        .toLowerCase();
 }

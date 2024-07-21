@@ -13,9 +13,19 @@ test('La palabra NO contiene la leta', function () {
 });
 
 test('Se puede arriesgar la letra en mayusculas', function () {
-    expect(game.guessLetter('O')).toBe(false);
-    expect(game.alreadyGuessed('o')).toBe(true);
+    expect(game.guessLetter('O')).toBe(true);
     expect(game.getCoincidences().at(4)).toBe(true);
+    expect(game.alreadyGuessed('o')).toBe(true);
+});
+
+test('Se puede arriesgar una letra con tilde', function () {
+    const g = new Game("Opción");
+    expect(g.word).toBe("opcion");
+
+    expect(g.guessLetter('O')).toBe(true);
+    expect(g.getCoincidences().at(0)).toBe(true);
+    expect(g.getCoincidences().at(4)).toBe(true);
+    expect(g.alreadyGuessed('o')).toBe(true);
 });
 
 test('La letra ya fue arriesgada', function () {

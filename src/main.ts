@@ -16,7 +16,7 @@ export class Game {
         if (!word){
             this.setNewWord(() => {});
         }else{
-            this.word = word;
+            this.word = normalizeStr(word);
             this.coincideces = Array(this.word.length).fill(false);
         }
     }
@@ -27,7 +27,7 @@ export class Game {
                 console.error(err);
                 throw new Error(err);
             }
-            this.word = word as string;
+            this.word = normalizeStr(word as string);
             this.coincideces = Array(this.word.length).fill(false);
             this.guesses = [];
             cb();
@@ -78,6 +78,8 @@ export class Game {
     }
 
     guessLetter(letter: string): boolean{
+        letter = normalizeStr(letter);
+
         if (this.alreadyGuessed(letter)) return true;
         if (!this.isValidLetter(letter)) return false; 
 
@@ -93,4 +95,10 @@ export class Game {
 
         return correct;
     }
+}
+function normalizeStr(str: string){
+    return str.normalize('NFD')
+        .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2")
+        .normalize()
+        .toLowerCase();
 }
