@@ -1,3 +1,5 @@
+[![unit test](https://github.com/Lautarotetamusa/lautarotetamusa.github.io/actions/workflows/unit-test.yaml/badge.svg)](https://github.com/Lautarotetamusa/lautarotetamusa.github.io/actions/workflows/unit-test.yaml)
+
 # Juego del ahorcado
 
 ## Integrantes
