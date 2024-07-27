@@ -9,12 +9,12 @@ export class Game {
     private coincideces: boolean[] = [];
     private guesses: string[] = [];
 
-    constructor(word?: string, maxLifes: number = 3) {
+    constructor(cb: Function, word?: string, maxLifes: number = 3) {
         //assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
         this.lifes = maxLifes;
 
         if (!word){
-            this.setNewWord(() => {});
+            this.setNewWord(cb);
         }else{
             this.word = normalizeStr(word);
             this.coincideces = Array(this.word.length).fill(false);

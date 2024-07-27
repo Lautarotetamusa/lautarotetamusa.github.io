@@ -25,7 +25,7 @@ export class Game {
             this.word = normalizeStr(word);
             this.coincideces = Array(this.word.length).fill(false);
             this.guesses = [];
-            cb();    update();
+            cb();
         });
     }
     getCoincidences() {
