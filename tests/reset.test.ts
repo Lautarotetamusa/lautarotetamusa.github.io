@@ -1,6 +1,6 @@
 import {Game} from "../src/main";
 
-const game = new Game("perro");
+const game = new Game(() => {}, "perro");
 
 test('Resetear el juego', function () {
     game.guessLetter("o");
