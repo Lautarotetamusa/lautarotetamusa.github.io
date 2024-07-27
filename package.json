@@ -16,7 +16,7 @@
         "typescript-eslint": "^7.17.0"
     },
     "scripts": {
-        "test": "npx jest tests/unit/*",
+        "test": "npx jest tests/*",
         "build": "npx tsc",
         "dev": "npx http-server",
         "lint": "npx eslint src/"
