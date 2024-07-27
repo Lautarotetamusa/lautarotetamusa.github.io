@@ -1,7 +1,16 @@
 import { Game } from "./main.js";
 
 const maxLifes = 5;
-const game = new Game(undefined, maxLifes);
+const game = new Game(() => {
+    update();
+    setupWord();
+}, undefined, maxLifes);
+
+window.setTestWord = (word) => {
+    game.word = word;
+    update();
+    setupWord();
+};
 
 const lives = document.getElementById("lives");
 const guesses = document.getElementById("guessed-letters-list");
@@ -9,8 +18,6 @@ const wordContainer = document.getElementById("word-container");
 const letters = wordContainer.getElementsByClassName("letter");
 const letterInput = document.getElementById("letter-input");
 const letterBtn = document.getElementById("submit-letter");
-
-resetGame();
 
 const winAlert = (word) => {
     return{
