@@ -1,14 +1,15 @@
 import { Game } from "./main.js";
 
 window.onload = () => {
+    const maxLifes = 5;
+
     window.setNewWord = (word) => {
-        game.word = word;
+        game = new Game(() => {}, word, maxLifes);
         update(); 
         setupWord();
     };
 
-    const maxLifes = 5;
-    const game = new Game(() => {
+    let game = new Game(() => {
         update();
         setupWord();
     }, undefined, maxLifes);
