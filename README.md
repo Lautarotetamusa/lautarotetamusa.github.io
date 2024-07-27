@@ -4,7 +4,7 @@
 
 ## Integrantes
 Lautaro Teta Musa - 49695
-Santiago Cancio - 
+Santiago Cancio - 42761
 
 ## Build
 `npm run build`
