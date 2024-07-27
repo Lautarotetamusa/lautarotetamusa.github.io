@@ -5,11 +5,11 @@ export class Game {
     lifes;
     coincideces = [];
     guesses = [];
-    constructor(word, maxLifes = 3) {
+    constructor(cb, word, maxLifes = 3) {
         //assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
         this.lifes = maxLifes;
         if (!word) {
-            this.setNewWord(() => { });
+            this.setNewWord(cb);
         }
         else {
             this.word = normalizeStr(word);
@@ -25,7 +25,7 @@ export class Game {
             this.word = normalizeStr(word);
             this.coincideces = Array(this.word.length).fill(false);
             this.guesses = [];
-            cb();
+            cb();    update();
         });
     }
     getCoincidences() {
