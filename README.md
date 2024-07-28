@@ -13,29 +13,29 @@ Simple juego del ahorcado desarrollado en typescript para la materia de Metodolo
 - Fácilmente customizable y extensible.
 
 ## Integrantes
-Lautaro Teta Musa - 49695 \ 
-Santiago Cancio - 42761 \
+* Lautaro Teta Musa - 49695
+* Santiago Cancio - 42761
 
 ## Instalacion en local
 1. Clonar el repositorio
-`bash
+```bash
 git clone --depth 1 https://github.com/Lautarotetamusa/lautarotetamusa.github.io
-`
+```
 
 2. Instalar dependencias
-`bash
+```bash
 npm install
-`
+```
 
 3. Buildear el juego
-`bash
+```bash
 npm run build
-`
+```
 
 4. Correr el juego localmente
-`bash
+```bash
 npm run dev
-`
+```
 
 5. El juego se ejecutará por default en `localhost:8080`
 
