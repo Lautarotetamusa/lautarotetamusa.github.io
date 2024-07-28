@@ -1,4 +1,4 @@
-const url = "https://random-word-api.herokuapp.com/word?lang=es"
+const url = "https://random-word-api.herokuapp.com/word?lang=es";
 
 type Callback = (word: string | null, err: string | null) => void;
 
@@ -17,5 +17,5 @@ export function getRandomWord(cb: Callback){
             
             return cb(data.at(0), null);
         })
-    })
+    });
 }
