@@ -87,7 +87,7 @@ window.onload = () => {
         wordContainer.innerHTML = '';
 
         for (const _ in game.word) {
-            var span = document.createElement("span");
+            let span = document.createElement("span");
             span.className = "letter";
             span.innerHTML = "_";
             wordContainer.appendChild(span);
