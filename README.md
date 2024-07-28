@@ -18,16 +18,24 @@ Santiago Cancio - 42761 \
 
 ## Instalacion en local
 1. Clonar el repositorio
-`git clone --depth 1 https://github.com/Lautarotetamusa/lautarotetamusa.github.io`
+`bash
+git clone --depth 1 https://github.com/Lautarotetamusa/lautarotetamusa.github.io
+`
 
 2. Instalar dependencias
-`npm install`
+`bash
+npm install
+`
 
 3. Buildear el juego
-`npm run build`
+`bash
+npm run build
+`
 
 4. Correr el juego localmente
-`npm run dev`
+`bash
+npm run dev
+`
 
 5. El juego se ejecutará por default en `localhost:8080`
 
