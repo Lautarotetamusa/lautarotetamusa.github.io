@@ -1,6 +1,6 @@
 import {Game} from "../src/main";
 
-const game = new Game(() => {}, "perro");
+const game = new Game("perro");
 
 test('La palabra contiene la leta', function () {
     expect(game.guessLetter('e')).toBe(true);
@@ -19,7 +19,7 @@ test('Se puede arriesgar la letra en mayusculas', function () {
 });
 
 test('Se puede arriesgar una letra con tilde', function () {
-    const g = new Game(() => {}, "Opción");
+    const g = new Game("Opción");
     expect(g.word).toBe("opcion");
 
     expect(g.guessLetter('O')).toBe(true);

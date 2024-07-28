@@ -4,7 +4,7 @@ type Callback = (word: string | null, err: string | null) => void;
 
 export function getRandomWord(cb: Callback){
     fetch(url)
-    .catch((err: Error )=> {
+    .catch((err: Error)=> {
         console.log("Api error:", err)
         return cb(null, err.message);
     })

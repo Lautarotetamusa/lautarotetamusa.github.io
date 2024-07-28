@@ -1,5 +1,3 @@
-//import { assert } from "console";
-
 import { getRandomWord } from "./api";
 
 export class Game {
@@ -9,29 +7,32 @@ export class Game {
     private coincideces: boolean[] = [];
     private guesses: string[] = [];
 
-    constructor(cb: Function, word?: string, maxLifes: number = 3) {
-        //assert(maxLifes > 1, "El maximo de vidas no puede ser menor a 1");
+    constructor(word?: string, maxLifes: number = 3) {
+        if (maxLifes < 1) throw new Error("El maximo de vidas no puede ser menor a 1");
         this.lifes = maxLifes;
 
-        if (!word){
-            this.setNewWord(cb);
-        }else{
-            this.word = normalizeStr(word);
-            this.coincideces = Array(this.word.length).fill(false);
+        if(word){
+            this.setWord(word);
         }
     }
 
-    setNewWord(cb: Function){
+    setRandomWord(cb: Function){
         getRandomWord((word, err) => {
             if (err !== null) {
                 console.error(err);
                 throw new Error(err);
             }
-            this.word = normalizeStr(word as string);
-            this.coincideces = Array(this.word.length).fill(false);
-            this.guesses = [];
+            this.setWord(word as string); // El error es null entonces word no es null
             cb();
         });
+    }
+
+    setWord(word: string){
+        if (!word) throw new Error(`La palabra es undefined palabra: ${word}`);
+
+        this.word = normalizeStr(word);
+        this.coincideces = Array(this.word.length).fill(false);
+        this.guesses = [];
     }
 
     getCoincidences(){
@@ -49,7 +50,7 @@ export class Game {
 
     reset(maxLifes: number = 3, cb: Function){
         this.lifes = maxLifes;
-        this.setNewWord(cb);
+        this.setRandomWord(cb);
     }
 
     loss(): boolean {
@@ -96,6 +97,7 @@ export class Game {
         return correct;
     }
 }
+
 function normalizeStr(str: string){
     return str.normalize('NFD')
         .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2")

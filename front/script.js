@@ -1,18 +1,17 @@
-import { Game } from "./main.js";
-
 window.onload = () => {
     const maxLifes = 5;
+    const game = new GameLibrary.Game();
 
     window.setNewWord = (word) => {
-        game = new Game(() => {}, word, maxLifes);
+        game.setWord(word);
         update(); 
         setupWord();
     };
 
-    let game = new Game(() => {
+    game.setRandomWord(() => {
         update();
         setupWord();
-    }, undefined, maxLifes);
+    });
 
     const lives = document.getElementById("lives");
     const guesses = document.getElementById("guessed-letters-list");
@@ -26,14 +25,14 @@ window.onload = () => {
             title: "Ganaste!",
             text: `La palabra es: "${word}"`,
             icon: "success"
-    }}
+    }};
 
     const lossAlert = (word) => {
         return{
             title: "Perdiste :((",
             text: `La palabra era: "${word}"`,
             icon: "error"
-    }}
+    }};
 
     letterBtn.addEventListener("click", () => {
         const letterInput = document.getElementById("letter-input");
@@ -79,7 +78,7 @@ window.onload = () => {
     function updateGuesses(){
         if (game.getGuesses().length > 0){
             guesses.innerHTML = game.getGuesses().join(', ');
-        }else{
+        }else{            
             guesses.innerHTML = '-';
         }
     }
