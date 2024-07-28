@@ -23,9 +23,8 @@ module.exports = {
             }
         ]
     },
-    /*
     optimization: {
-        //minimize: true, // Habilitar minimización
+        minimize: true, // Habilitar minimización
         minimizer: [new TerserWebpackPlugin()], // Usar TerserWebpackPlugin
-    },*/
+    },
 };

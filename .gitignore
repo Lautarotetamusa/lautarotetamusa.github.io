@@ -2,3 +2,4 @@ node_modules/
 package-lock.json
 coverage
 front/game-bundle.js
+front/game-bundle.js.*
