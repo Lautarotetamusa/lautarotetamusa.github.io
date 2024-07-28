@@ -17,6 +17,7 @@
     },
     "scripts": {
         "test": "npx jest --detectOpenHandles tests/*",
+        "coverage": "npx jest --coverage tests/*",
         "build": "npx tsc",
         "dev": "npx http-server",
         "lint": "npx eslint src/"
