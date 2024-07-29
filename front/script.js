@@ -1,6 +1,6 @@
 window.onload = () => {
     const maxLifes = 5;
-    const game = new GameLibrary.Game();
+    const game = new GameLibrary.Game(maxLifes);
 
     // Usamos esta funcion para los acceptance tests
     window.setNewWord = (word) => {
@@ -64,7 +64,8 @@ window.onload = () => {
     });
 
     function resetGame(){
-        game.reset(maxLifes, () => {
+        game.reset(maxLifes);
+        game.setRandomWord(() => {
             update();
             setupWord();
         });
