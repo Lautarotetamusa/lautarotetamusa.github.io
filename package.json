@@ -22,6 +22,7 @@
     },
     "scripts": {
         "test": "jest --detectOpenHandles tests/*",
+        "acceptance": "cypress run",
         "coverage": "jest --coverage tests/*",
         "build": "webpack",
         "dev": "http-server",
