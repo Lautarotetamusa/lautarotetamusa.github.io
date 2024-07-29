@@ -1,6 +1,7 @@
 import {Game} from "../src/main";
 
-const game = new Game("perro");
+const game = new Game();
+game.setWord("perro");
 
 test('encuentra una coincidencia', function () {
     game.guessLetter('r');

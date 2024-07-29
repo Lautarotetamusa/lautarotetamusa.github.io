@@ -2,6 +2,7 @@ window.onload = () => {
     const maxLifes = 5;
     const game = new GameLibrary.Game();
 
+    // Usamos esta funcion para los acceptance tests
     window.setNewWord = (word) => {
         game.setWord(word);
         update(); 

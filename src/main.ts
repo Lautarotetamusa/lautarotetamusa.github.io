@@ -7,13 +7,9 @@ export class Game {
     private coincideces: boolean[] = [];
     private guesses: string[] = [];
 
-    constructor(word?: string, maxLifes: number = 3) {
+    constructor(maxLifes: number = 3) {
         if (maxLifes < 1) throw new Error("El maximo de vidas no puede ser menor a 1");
         this.lifes = maxLifes;
-
-        if(word){
-            this.setWord(word);
-        }
     }
 
     setRandomWord(cb: Function){
@@ -29,10 +25,16 @@ export class Game {
 
     setWord(word: string){
         if (!word) throw new Error(`La palabra es undefined palabra: ${word}`);
+        if (typeof word != "string") throw new Error("La palabra debe ser un string");
 
         this.word = normalizeStr(word);
         this.coincideces = Array(this.word.length).fill(false);
         this.guesses = [];
+    }
+
+    reset(maxLifes: number){
+        this.lifes = maxLifes;
+        this.setWord(this.word);
     }
 
     getCoincidences(){
@@ -46,11 +48,6 @@ export class Game {
     }
     getLifes(){
         return this.lifes;
-    }
-
-    reset(maxLifes: number = 3, cb: Function){
-        this.lifes = maxLifes;
-        this.setRandomWord(cb);
     }
 
     loss(): boolean {
@@ -73,16 +70,11 @@ export class Game {
         return correct;
     }
 
-    private isValidLetter(letter: string): boolean{
-        return  letter.length === 1 && 
-                letter.match(/[a-z]/i) !== null;
-    }
-
     guessLetter(letter: string): boolean{
         letter = normalizeStr(letter);
 
         if (this.alreadyGuessed(letter)) return true;
-        if (!this.isValidLetter(letter)) return false; 
+        if (!isValidLetter(letter)) return false; 
 
         let correct = false;
         this.guesses.push(letter);
@@ -103,4 +95,9 @@ function normalizeStr(str: string){
         .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2")
         .normalize()
         .toLowerCase();
+}
+
+function isValidLetter(letter: string): boolean{
+    return letter.length === 1 && 
+           letter.match(/[a-z]/i) !== null;
 }
