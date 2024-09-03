@@ -84,7 +84,6 @@ export class Game {
                 correct = true;
             }
         }
-        if (!correct) this.lifes--;
 
         return correct;
     }
